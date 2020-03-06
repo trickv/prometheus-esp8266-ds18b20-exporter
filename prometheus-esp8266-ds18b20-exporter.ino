@@ -156,7 +156,7 @@ void MeasureTemperature(long now) {
       tempDevC[i] = tempC;
       tempDevF[i] = tempF;
     }
-    DS18B20.setWaitForConversion(false); //No waiting for measurement
+    DS18B20.setWaitForConversion(true);
     DS18B20.requestTemperatures(); //Initiate the temperature measurement
     lastTemp = millis();  //Remember the last time measurement
   }
