@@ -3,11 +3,13 @@
 
 Exposes a prometheus exporter endpoint endpoint for scraping DS18B20 temperature sensor readings.
 
+Forked from https://github.com/theoretick/esp8266_prometheus_exporter_for_ds18b20_temperature_sensors to convert to a traditional Arduino project.
+
 
 ## Usage
 
-1. Configure `ssid` and `password` for wifi network within `main.cpp`
-2. [Build library against 8266 platform](https://docs.platformio.org/en/latest/platforms/espressif8266.html)  
+1. Configure `ssid` and `password` for wifi network
+2. Build with Arduino IDE
 3. hit `/metrics` endpoint for reading temperature (C), temperature (F), device resolution, and device count:
 
 ```
