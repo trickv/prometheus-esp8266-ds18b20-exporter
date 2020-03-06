@@ -19,6 +19,7 @@ float tempDevCLast[ONE_WIRE_MAX_DEV]; //Previous temperature measurement
 float tempDevF[ONE_WIRE_MAX_DEV]; //Saving the last measurement of temperature
 float tempDevFLast[ONE_WIRE_MAX_DEV]; //Previous temperature measurement
 long lastTemp; //The last measurement
+long tempRequests = 0;
 const int measureTempFrequency = 5000; //The frequency of temperature measurement
 
 //------------------------------------------
@@ -84,6 +85,9 @@ void SetupDS18B20() {
 }
 
 String GenerateMetrics() {
+  if (tempRequests <= 0) { // the sensors have never been read yet since we just booted up
+    return "# Come back in a few more seconds when we have data...";
+  }
   String message = "";
 
   message += "# HELP beertemp_device_total A count of probe devices connected.\n";
@@ -159,6 +163,7 @@ void MeasureTemperature(long now) {
     DS18B20.setWaitForConversion(true);
     DS18B20.requestTemperatures(); //Initiate the temperature measurement
     lastTemp = millis();  //Remember the last time measurement
+    tempRequests++;
   }
 }
 
